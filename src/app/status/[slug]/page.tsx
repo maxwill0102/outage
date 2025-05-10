@@ -75,10 +75,12 @@ const fakeData: Record<string, ServiceType> = {
 const [service, setService] = useState<ServiceType | null>(null)
 
 useEffect(() => {
-  if (slug in fakeData) {
-    setService(fakeData[slug])
+  const selected = fakeData[slug]
+  if (selected) {
+  setService(selected)
   }
-}, [slug])
+
+}, [slug, fakeData])
 
 
   if (!service) {
