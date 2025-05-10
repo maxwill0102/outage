@@ -45,42 +45,43 @@ export default function StatusPage() {
   issues: string[]
 }
 
-const fakeData: Record<string, ServiceType> = {
-  twitter: {
-    name: "Twitter",
-    status: "down",
-    reports: 125,
-    issues: ["Can't login", "Timeline not refreshing", "DMs failing"],
-  },
-  whatsapp: {
-    name: "WhatsApp",
-    status: "ok",
-    reports: 18,
-    issues: ["Minor delays", "Media not sending"],
-  },
-  discord: {
-    name: "Discord",
-    status: "slow",
-    reports: 44,
-    issues: ["Slow message delivery", "Login latency"],
-  },
-  alrajhi: {
-    name: "Al Rajhi Bank",
-    status: "ok",
-    reports: 22,
-    issues: ["App loading slow", "OTP timeout"],
-  },
-}
 
 const [service, setService] = useState<ServiceType | null>(null)
-
 useEffect(() => {
-  const selected = fakeData[slug]
-  if (selected) {
-  setService(selected)
+  const fakeData: Record<string, ServiceType> = {
+    twitter: {
+      name: "Twitter",
+      status: "down",
+      reports: 125,
+      issues: ["Can't login", "Timeline not refreshing", "DMs failing"],
+    },
+    whatsapp: {
+      name: "WhatsApp",
+      status: "ok",
+      reports: 18,
+      issues: ["Minor delays", "Media not sending"],
+    },
+    discord: {
+      name: "Discord",
+      status: "slow",
+      reports: 44,
+      issues: ["Slow message delivery", "Login latency"],
+    },
+    alrajhi: {
+      name: "Al Rajhi Bank",
+      status: "ok",
+      reports: 22,
+      issues: ["App loading slow", "OTP timeout"],
+    },
   }
 
-}, [slug, fakeData])
+  const selected = fakeData[slug]
+  if (selected) {
+    setService(selected)
+  }
+}, [slug])
+
+
 
 
   if (!service) {
