@@ -37,7 +37,15 @@ const fakeData = {
 export default function StatusPage() {
   const params = useParams()
   const slug = params?.slug as string
-  const [service, setService] = useState<any>(null)
+  
+  type ServiceType = {
+  name: string
+  status: string
+  reports: number
+  issues: string[]
+}
+
+const [service, setService] = useState<ServiceType | null>(null)
 
   useEffect(() => {
     if (slug && fakeData[slug]) {
