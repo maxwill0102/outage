@@ -7,82 +7,51 @@ import { Button } from "@/components/ui/button"
 import { ArrowLeft, AlertTriangle, CheckCircle, Loader } from "lucide-react"
 import Link from "next/link"
 
-const fakeData = {
-  twitter: {
-    name: "Twitter",
-    status: "down",
-    reports: 125,
-    issues: ["Can't login", "Timeline not refreshing", "DMs failing"],
-  },
-  whatsapp: {
-    name: "WhatsApp",
-    status: "ok",
-    reports: 18,
-    issues: ["Minor delays", "Media not sending"],
-  },
-  discord: {
-    name: "Discord",
-    status: "slow",
-    reports: 44,
-    issues: ["Slow message delivery", "Login latency"],
-  },
-  alrajhi: {
-    name: "Al Rajhi Bank",
-    status: "ok",
-    reports: 22,
-    issues: ["App loading slow", "OTP timeout"]
-  }
-}
-
-export default function StatusPage() {
-  const params = useParams()
-  const slug = params?.slug as string
-  
-  type ServiceType = {
+type ServiceType = {
   name: string
   status: string
   reports: number
   issues: string[]
 }
 
+export default function StatusPage() {
+  const params = useParams()
+  const slug = params?.slug as string
+  const [service, setService] = useState<ServiceType | null>(null)
 
-const [service, setService] = useState<ServiceType | null>(null)
-useEffect(() => {
-  const fakeData: Record<string, ServiceType> = {
-    twitter: {
-      name: "Twitter",
-      status: "down",
-      reports: 125,
-      issues: ["Can't login", "Timeline not refreshing", "DMs failing"],
-    },
-    whatsapp: {
-      name: "WhatsApp",
-      status: "ok",
-      reports: 18,
-      issues: ["Minor delays", "Media not sending"],
-    },
-    discord: {
-      name: "Discord",
-      status: "slow",
-      reports: 44,
-      issues: ["Slow message delivery", "Login latency"],
-    },
-    alrajhi: {
-      name: "Al Rajhi Bank",
-      status: "ok",
-      reports: 22,
-      issues: ["App loading slow", "OTP timeout"],
-    },
-  }
+  useEffect(() => {
+    const fakeData: Record<string, ServiceType> = {
+      twitter: {
+        name: "Twitter",
+        status: "down",
+        reports: 125,
+        issues: ["Can't login", "Timeline not refreshing", "DMs failing"],
+      },
+      whatsapp: {
+        name: "WhatsApp",
+        status: "ok",
+        reports: 18,
+        issues: ["Minor delays", "Media not sending"],
+      },
+      discord: {
+        name: "Discord",
+        status: "slow",
+        reports: 44,
+        issues: ["Slow message delivery", "Login latency"],
+      },
+      alrajhi: {
+        name: "Al Rajhi Bank",
+        status: "ok",
+        reports: 22,
+        issues: ["App loading slow", "OTP timeout"],
+      },
+    }
 
-  const selected = fakeData[slug]
-  if (selected) {
-    setService(selected)
-  }
-}, [slug])
-
-
-
+    const selected = fakeData[slug]
+    if (selected) {
+      setService(selected)
+    }
+  }, [slug])
 
   if (!service) {
     return (
